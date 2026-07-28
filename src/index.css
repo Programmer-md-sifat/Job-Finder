@@ -1,0 +1,197 @@
+@import "tailwindcss";
+
+@theme {
+  --font-space: 'Lexend', sans-serif;
+  --font-sans: 'Lexend', sans-serif;
+  
+  --color-regal-blue: #182956;
+  --color-regal-blue-light: #223872;
+  --color-regal-blue-dark: #0f1a38;
+
+  --color-melon: #FCB2B1;
+  --color-melon-light: #fdd5d4;
+  --color-melon-dark: #e89594;
+
+  --color-burnt-orange: #F66E3B;
+  --color-burnt-orange-hover: #e05927;
+  --color-burnt-orange-light: #ffede8;
+
+  --color-white-smoke: #EFECEC;
+  --color-white-smoke-card: #F7F6F5;
+}
+
+/* Custom Utilities for Lexend font */
+.font-space {
+  font-family: var(--font-space);
+}
+
+/* Lenis smooth scrolling compatibility styles */
+html.lenis, html.lenis body {
+  height: auto;
+}
+
+.lenis.lenis-smooth {
+  scroll-behavior: auto !important;
+}
+
+.lenis.lenis-smooth [data-lenis-prevent] {
+  overscroll-behavior: contain;
+}
+
+.lenis.lenis-stopped {
+  overflow: hidden;
+}
+
+.lenis.lenis-smooth iframe {
+  pointer-events: none;
+}
+
+/* Scrollbar styling */
+::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+::-webkit-scrollbar-track {
+  background: #EFECEC;
+}
+::-webkit-scrollbar-thumb {
+  background: #182956;
+  border-radius: 4px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: #F66E3B;
+}
+
+/* Custom premium, borderless range slider styles */
+.custom-slider {
+  -webkit-appearance: none;
+  appearance: none;
+  width: 100%;
+  height: 22px; /* Large click target */
+  padding: 8px 0; /* Confines background to 6px height */
+  background-clip: content-box; /* Dynamic gradient will only color the content height */
+  background-color: transparent;
+  cursor: pointer;
+  border: none;
+  border-radius: 9999px; /* Rounded track corners */
+  outline: none;
+  box-shadow: none;
+}
+
+.custom-slider:focus {
+  outline: none;
+  border: none;
+  box-shadow: none;
+}
+
+/* Track styling overrides */
+.custom-slider::-webkit-slider-runnable-track {
+  width: 100%;
+  height: 6px;
+  border: none;
+  background: transparent;
+  box-shadow: none;
+}
+
+.custom-slider::-moz-range-track {
+  width: 100%;
+  height: 6px;
+  border: none;
+  background: transparent;
+  box-shadow: none;
+}
+
+/* Thumb styling overrides */
+.custom-slider::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  appearance: none;
+  width: 18px;
+  height: 18px;
+  border-radius: 9999px;
+  background-color: #F66E3B;
+  border: 2px solid #ffffff;
+  box-shadow: 0 2px 5px rgba(24, 41, 86, 0.2);
+  cursor: grab;
+  margin-top: -6px; /* Centered in the 6px track */
+  transition: transform 0.15s cubic-bezier(0.4, 0, 0.2, 1), background-color 0.15s ease;
+}
+
+.custom-slider::-webkit-slider-thumb:hover {
+  background-color: #e05927;
+  transform: scale(1.1);
+}
+
+.custom-slider::-webkit-slider-thumb:active {
+  cursor: grabbing;
+  background-color: #e05927;
+  transform: scale(1.15);
+  box-shadow: 0 3px 8px rgba(246, 110, 59, 0.35);
+}
+
+.custom-slider::-moz-range-thumb {
+  width: 18px;
+  height: 18px;
+  border-radius: 9999px;
+  background-color: #F66E3B;
+  border: 2px solid #ffffff;
+  box-shadow: 0 2px 5px rgba(24, 41, 86, 0.2);
+  cursor: grab;
+  transition: transform 0.15s cubic-bezier(0.4, 0, 0.2, 1), background-color 0.15s ease;
+}
+
+.custom-slider::-moz-range-thumb:hover {
+  background-color: #e05927;
+  transform: scale(1.1);
+}
+
+.custom-slider::-moz-range-thumb:active {
+  cursor: grabbing;
+  background-color: #e05927;
+  transform: scale(1.15);
+  box-shadow: 0 3px 8px rgba(246, 110, 59, 0.35);
+}
+
+/* Custom premium, borderless dropdown styles for all native selects */
+select {
+  appearance: none !important;
+  -webkit-appearance: none !important;
+  -moz-appearance: none !important;
+  background-image: url("data:image/svg+xml;charset=UTF-8,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%23182956' stroke-width='2.5' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpolyline points='6 9 12 15 18 9'%3E%3C/polyline%3E%3C/svg%3E") !important;
+  background-repeat: no-repeat !important;
+  background-position: right 1rem center !important;
+  background-size: 1em !important;
+  padding-right: 2.75rem !important;
+  border-radius: 12px !important;
+  border: 1px solid #cbd5e1 !important; /* Soft light gray border */
+  outline: none !important;
+  box-shadow: none !important;
+  transition: border-color 0.2s ease, box-shadow 0.2s ease !important;
+}
+
+select:hover {
+  border-color: #94a3b8 !important; /* Soft slate gray hover */
+  outline: none !important;
+}
+
+select:focus {
+  outline: none !important;
+  border-color: #F66E3B !important; /* Burnt orange focus accent */
+  box-shadow: 0 0 0 3px rgba(246, 110, 59, 0.15) !important;
+}
+
+/* Dark background select overrides */
+select.bg-\[\#223872\], select.text-white {
+  background-image: url("data:image/svg+xml;charset=UTF-8,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%23ffffff' stroke-width='2.5' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpolyline points='6 9 12 15 18 9'%3E%3C/polyline%3E%3C/svg%3E") !important;
+  border-color: rgba(255, 255, 255, 0.2) !important;
+}
+
+select.bg-\[\#223872\]:hover, select.text-white:hover {
+  border-color: rgba(255, 255, 255, 0.4) !important;
+}
+
+select.bg-\[\#223872\]:focus, select.text-white:focus {
+  border-color: #F66E3B !important;
+  box-shadow: 0 0 0 3px rgba(246, 110, 59, 0.3) !important;
+}
+
+
