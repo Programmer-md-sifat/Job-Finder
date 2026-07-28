@@ -37,7 +37,12 @@ export default function App() {
 
   // Scroll to top automatically whenever the route changes
   useEffect(() => {
-    window.scrollTo({ top: 0, behavior: 'auto' });
+    const lenis = (window as any).lenis;
+    if (lenis) {
+      lenis.scrollTo(0, { immediate: true });
+    } else {
+      window.scrollTo({ top: 0, behavior: 'auto' });
+    }
   }, [location.pathname]);
 
   const handleToggleSaveJob = (jobId: string) => {

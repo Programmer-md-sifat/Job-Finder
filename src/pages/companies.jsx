@@ -142,7 +142,12 @@ export default function CompaniesPage({ onViewJobsForCompany }) {
               totalPages={totalPages}
               onPageChange={(page) => {
                 setCurrentPage(page);
-                window.scrollTo({ top: 0, behavior: 'smooth' });
+                const lenis = window.lenis;
+                if (lenis) {
+                  lenis.scrollTo(0, { immediate: false });
+                } else {
+                  window.scrollTo({ top: 0, behavior: 'smooth' });
+                }
               }}
               className="pt-6"
             />
