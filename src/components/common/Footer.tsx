@@ -42,7 +42,7 @@ export default function Footer({ setActivePage, onSelectCityFilter }: FooterProp
           
           {/* Brand Column */}
           <div className="lg:col-span-2 space-y-4">
-            <Logo size="md" layout="horizontal" />
+            <Logo size="lg" layout="horizontal" />
 
             <p className="text-white/80 text-sm leading-relaxed max-w-sm">
               America’s dedicated tech and enterprise career hub. We connect verified US talent with leading employers across all 50 states with 100% salary transparency.

@@ -49,42 +49,46 @@ export default function Navbar({
   return (
     <header className="sticky top-0 z-50 bg-[#182956] text-white border-b border-[#182956]/40 shadow-lg backdrop-blur-md">
 
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div className="max-w-7xl mx-auto px-6 sm:px-10 lg:px-12">
         <div className="flex items-center justify-between h-18">
-          {/* Brand Logo */}
-          <button 
-            onClick={() => handleNavClick('home')}
-            className="focus:outline-none focus:ring-2 focus:ring-[#F66E3B] rounded-lg p-1 text-left"
-            id="navbar-logo-btn"
-          >
-            <Logo size="md" layout="horizontal" />
-          </button>
+          {/* Brand Logo - Left Aligned */}
+          <div className="flex-1 flex justify-start items-center">
+            <button 
+              onClick={() => handleNavClick('home')}
+              className="focus:outline-none focus:ring-2 focus:ring-[#F66E3B] rounded-lg p-1 text-left"
+              id="navbar-logo-btn"
+            >
+              <Logo size="md" layout="horizontal" />
+            </button>
+          </div>
 
-          {/* Desktop Navigation Links */}
-          <nav className="hidden md:flex items-center gap-1 bg-[#223872]/60 p-1.5 rounded-xl border border-[#223872]">
-            {navItems.map((item) => {
-              const Icon = item.icon;
-              const isActive = activePage === item.id;
-              return (
-                <button
-                  key={item.id}
-                  id={`nav-link-${item.id}`}
-                  onClick={() => handleNavClick(item.id)}
-                  className={`flex items-center gap-2 px-4 py-2 rounded-lg text-sm font-medium transition-all duration-200 ${
-                    isActive
-                      ? 'bg-[#F66E3B] text-white shadow-md font-semibold'
-                      : 'text-white/80 hover:text-white hover:bg-white/10'
-                  }`}
-                >
-                  <Icon className={`w-4 h-4 ${isActive ? 'text-white' : 'text-[#FCB2B1]'}`} />
-                  <span>{item.label}</span>
-                </button>
-              );
-            })}
-          </nav>
+          {/* Desktop Navigation Links - Centered */}
+          <div className="hidden md:flex flex-initial items-center justify-center">
+            <nav className="flex items-center gap-1 bg-[#223872]/60 p-1.5 rounded-xl border border-[#223872]">
+              {navItems.map((item) => {
+                const Icon = item.icon;
+                const isActive = activePage === item.id;
+                return (
+                  <button
+                    key={item.id}
+                    id={`nav-link-${item.id}`}
+                    onClick={() => handleNavClick(item.id)}
+                    className={`flex items-center gap-2 px-4 py-2 rounded-lg text-sm font-medium transition-all duration-200 ${
+                      isActive
+                        ? 'bg-[#F66E3B] text-white shadow-md font-semibold'
+                        : 'text-white/80 hover:text-white hover:bg-white/10'
+                    }`}
+                  >
+                    <Icon className={`w-4 h-4 ${isActive ? 'text-white' : 'text-[#FCB2B1]'}`} />
+                    <span>{item.label}</span>
+                  </button>
+                );
+              })}
+            </nav>
+          </div>
 
-          {/* Action CTAs */}
-          <div className="hidden lg:flex items-center gap-3">
+          {/* Action CTAs - Right Aligned */}
+          <div className="hidden lg:flex-1 lg:flex items-center justify-end gap-3">
             {/* Saved Jobs Button */}
             <button
               id="btn-saved-jobs"
@@ -120,6 +124,9 @@ export default function Navbar({
               <span>Sign In</span>
             </button>
           </div>
+
+          {/* Dummy spacer for perfect centering on md screens when CTAs are hidden */}
+          <div className="hidden md:block lg:hidden flex-1"></div>
 
           {/* Mobile Menu Toggle */}
           <div className="flex md:hidden items-center gap-2">

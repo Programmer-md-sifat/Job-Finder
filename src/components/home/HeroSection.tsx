@@ -27,12 +27,18 @@ export default function HeroSection({ onSearch, onSelectCategory }: HeroSectionP
   ];
 
   return (
-    <section className="relative bg-gradient-to-b from-[#111f48] via-[#182956] to-[#0f1a38] text-white overflow-hidden pt-12 pb-20 md:py-24 border-b border-[#223872]">
+    <section 
+      className="relative text-white overflow-hidden pt-12 pb-20 md:py-24 border-b border-[#223872] bg-cover bg-center bg-no-repeat"
+      style={{ backgroundImage: `url('https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?auto=format&fit=crop&w=1920&q=80')` }}
+    >
+      {/* Deep premium dark blue/navy gradient overlay to make text pop while keeping the background image beautifully visible */}
+      <div className="absolute inset-0 bg-gradient-to-b from-[#111f48]/92 via-[#182956]/88 to-[#0f1a38]/95 pointer-events-none"></div>
+
       {/* Premium subtle linear gradient overlays that give depth without being overpowering */}
-      <div className="absolute inset-0 bg-[linear-gradient(135deg,rgba(246,110,59,0.05)_0%,transparent_50%,rgba(252,178,177,0.03)_100%)] pointer-events-none"></div>
+      <div className="absolute inset-0 bg-[linear-gradient(135deg,rgba(246,110,59,0.06)_0%,transparent_50%,rgba(252,178,177,0.04)_100%)] pointer-events-none"></div>
       
       {/* Soft top-to-bottom shading for a balanced experience */}
-      <div className="absolute inset-0 bg-gradient-to-t from-black/10 via-transparent to-white/5 pointer-events-none"></div>
+      <div className="absolute inset-0 bg-gradient-to-t from-black/20 via-transparent to-white/5 pointer-events-none"></div>
 
       {/* Extremely faint horizontal accent lines representing a clean corporate grid */}
       <div className="absolute top-1/3 left-0 right-0 h-px bg-gradient-to-r from-transparent via-white/5 to-transparent pointer-events-none"></div>
