@@ -5,6 +5,7 @@ import Navbar from './components/common/Navbar';
 import Footer from './components/common/Footer';
 import PostJobModal from './components/common/PostJobModal';
 import AuthModal from './components/common/AuthModal';
+import PageTransition from './components/common/PageTransition';
 
 import HomePage from './pages/home';
 import JobPage from './pages/job';
@@ -35,14 +36,9 @@ export default function App() {
   const [postJobOpen, setPostJobOpen] = useState(false);
   const [authOpen, setAuthOpen] = useState(false);
 
-  // Scroll to top automatically whenever the route changes
+  // Scroll is managed gracefully inside PageTransition to prevent layout jumping during exit animations
   useEffect(() => {
-    const lenis = (window as any).lenis;
-    if (lenis) {
-      lenis.scrollTo(0, { immediate: true });
-    } else {
-      window.scrollTo({ top: 0, behavior: 'auto' });
-    }
+    // Soft fallback if needed, but PageTransition handles the core scroll reset elegantly
   }, [location.pathname]);
 
   const handleToggleSaveJob = (jobId: string) => {
@@ -116,84 +112,100 @@ export default function App() {
         />
 
         {/* Dynamic Main Page Content with React Router Routes */}
-        <div className="flex-grow">
+        <div className="flex-grow overflow-hidden">
           <Routes>
             <Route
               path="/"
               element={
-                <HomePage
-                  onSearchJobs={handleSearchJobsFromHome}
-                  onSelectCategory={handleSelectCategoryFromHome}
-                  onSelectCompany={(comp) => navigate(`/company/${comp.id}`)}
-                  onViewAllCompanies={() => navigate('/companies')}
-                />
+                <PageTransition>
+                  <HomePage
+                    onSearchJobs={handleSearchJobsFromHome}
+                    onSelectCategory={handleSelectCategoryFromHome}
+                    onSelectCompany={(comp) => navigate(`/company/${comp.id}`)}
+                    onViewAllCompanies={() => navigate('/companies')}
+                  />
+                </PageTransition>
               }
             />
 
             <Route
               path="/jobs"
               element={
-                <JobPage
-                  initialSearchQuery={searchParams.query}
-                  initialLocation={searchParams.location}
-                  initialDepartment={searchParams.department}
-                  savedJobIds={savedJobIds}
-                  onToggleSaveJob={handleToggleSaveJob}
-                  showOnlySavedJobs={showOnlySaved}
-                  onSelectJob={(job: Job) => {
-                    setSelectedJob(job);
-                    navigate(`/job/${job.id}`);
-                  }}
-                  onQuickApply={(job: Job) => {
-                    setSelectedJob(job);
-                    navigate(`/apply/${job.id}`);
-                  }}
-                />
+                <PageTransition>
+                  <JobPage
+                    initialSearchQuery={searchParams.query}
+                    initialLocation={searchParams.location}
+                    initialDepartment={searchParams.department}
+                    savedJobIds={savedJobIds}
+                    onToggleSaveJob={handleToggleSaveJob}
+                    showOnlySavedJobs={showOnlySaved}
+                    onSelectJob={(job: Job) => {
+                      setSelectedJob(job);
+                      navigate(`/job/${job.id}`);
+                    }}
+                    onQuickApply={(job: Job) => {
+                      setSelectedJob(job);
+                      navigate(`/apply/${job.id}`);
+                    }}
+                  />
+                </PageTransition>
               }
             />
 
             <Route
               path="/companies"
               element={
-                <CompaniesPage
-                  onViewJobsForCompany={handleViewJobsForCompany}
-                />
+                <PageTransition>
+                  <CompaniesPage
+                    onViewJobsForCompany={handleViewJobsForCompany}
+                  />
+                </PageTransition>
               }
             />
 
             <Route
               path="/company/:companyId"
               element={
-                <CompanyDetailPage
-                  onViewJobsForCompany={handleViewJobsForCompany}
-                />
+                <PageTransition>
+                  <CompanyDetailPage
+                    onViewJobsForCompany={handleViewJobsForCompany}
+                  />
+                </PageTransition>
               }
             />
 
             <Route
               path="/aboutus"
-              element={<AboutUsPage />}
+              element={
+                <PageTransition>
+                  <AboutUsPage />
+                </PageTransition>
+              }
             />
 
             <Route
               path="/job/:jobId"
               element={
-                <JobDetailRouteWrapper
-                  savedJobIds={savedJobIds}
-                  onToggleSaveJob={handleToggleSaveJob}
-                  setSelectedJob={setSelectedJob}
-                  navigate={navigate}
-                />
+                <PageTransition>
+                  <JobDetailRouteWrapper
+                    savedJobIds={savedJobIds}
+                    onToggleSaveJob={handleToggleSaveJob}
+                    setSelectedJob={setSelectedJob}
+                    navigate={navigate}
+                  />
+                </PageTransition>
               }
             />
 
             <Route
               path="/apply/:jobId"
               element={
-                <ApplyJobRouteWrapper
-                  setSelectedJob={setSelectedJob}
-                  navigate={navigate}
-                />
+                <PageTransition>
+                  <ApplyJobRouteWrapper
+                    setSelectedJob={setSelectedJob}
+                    navigate={navigate}
+                  />
+                </PageTransition>
               }
             />
           </Routes>
